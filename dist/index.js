@@ -38,7 +38,7 @@ Module.directive('datePicker', ['datePickerConfig', 'datePickerUtils', function 
       after: '=?',
       before: '=?'
     },
-    require: '?ngModel',
+    require: 'ngModel',
     link: function (scope, element, attrs, ngModel) {
 
       scope.date = new Date(scope.model || new Date());
@@ -95,7 +95,9 @@ Module.directive('datePicker', ['datePickerConfig', 'datePickerUtils', function 
             scope.model.setFullYear(date.getFullYear());
           }
           scope.$emit('setDate', scope.model, scope.view);
+          
           ngModel.$setViewValue(scope.model);
+          scope.$apply();
         }
 
         if (nextView) {
